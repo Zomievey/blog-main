@@ -1,0 +1,9 @@
+.nav {
+  background-color: #49A4C4;
+  height: 75px;
+}
+
+.nav a,
+.nav button {
+  color: white;
+}

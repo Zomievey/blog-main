@@ -1,0 +1,17 @@
+.comment-textarea {
+  width: 88vw;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 8px;
+  min-height: 10vh;
+}
+
+.comment-textarea-edit{
+  width: 87vw;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 8px;
+  min-height: 10vh;
+}
