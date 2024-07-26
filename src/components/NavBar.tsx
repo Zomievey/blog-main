@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import { useAuth } from '../hooks/useAuth';
-import '../styles/navbar.css';
+import Link from "next/link";
+import { useAuth } from "../hooks/useAuth";
+import "../styles/navbar.css";
 
 export default function Navbar() {
   const { user, signout } = useAuth();
@@ -8,9 +8,7 @@ export default function Navbar() {
   return (
     <nav className="nav p-6">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="text-white font-bold text-xl">
-          Blog
-        </div>
+        <div className="text-white font-bold text-xl">Blog</div>
         <div className="space-x-4">
           {user && (
             <Link href="/" legacyBehavior>
@@ -18,7 +16,9 @@ export default function Navbar() {
             </Link>
           )}
           {user ? (
-            <button onClick={signout} className="text-white">Logout</button>
+            <button onClick={signout} className="text-white">
+              Logout
+            </button>
           ) : (
             <>
               <Link href="/login" legacyBehavior>

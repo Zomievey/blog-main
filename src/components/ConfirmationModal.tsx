@@ -1,21 +1,38 @@
-import React from 'react';
-import '../styles/buttons.css';
+// ConfirmModal.tsx
+import React from "react";
+import "../styles/buttons.css";
 
 type ConfirmModalProps = {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
-  postTitle?: string | null;
+  entityType: "post" | "comment";
+  entityTitle?: string | null;
 };
 
-const ConfirmModal = ({ isOpen, onClose, onConfirm, postTitle }: ConfirmModalProps) => {
+const ConfirmModal = ({
+  isOpen,
+  onClose,
+  onConfirm,
+  entityType,
+  entityTitle,
+}: ConfirmModalProps) => {
   if (!isOpen) return null;
+
+  const renderMessage = () => {
+    if (entityTitle) {
+      return {
+        __html: `Are you sure you want to delete this ${entityType} titled "<strong>${entityTitle}</strong>"?`,
+      };
+    }
+    return { __html: `Are you sure you want to delete this ${entityType}?` };
+  };
 
   return (
     <div className='fixed inset-0 flex items-center justify-center z-50'>
       <div className='bg-white p-6 rounded shadow-lg'>
         <h2 className='text-lg font-bold mb-4'>Confirm Deletion</h2>
-        <p>Are you sure you want to delete the post titled "<strong>{postTitle}</strong>"?</p>
+        <p dangerouslySetInnerHTML={renderMessage()}></p>
         <div className='flex justify-end mt-4'>
           <button
             onClick={onClose}

@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Comment } from "../types";
 import { useAuth } from "../hooks/useAuth";
+import ConfirmModal from "./ConfirmationModal";
+
 import "../styles/buttons.css";
 
 interface CommentSectionProps {
@@ -14,8 +16,10 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
   const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
   const [editingContent, setEditingContent] = useState("");
   const { user, getUsername } = useAuth();
-
-  console.log("postId:", postId);
+  const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
+  const [commentIdToDelete, setCommentIdToDelete] = useState<string | null>(
+    null
+  );
 
   useEffect(() => {
     fetchComments();
@@ -41,11 +45,32 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
         username, // Include username
         createdAt: new Date().toISOString(),
       };
-      await axios.post("/api/comments", newComment);
+      console.log("Submitting new comment:", newComment); // Debug log
+      await axios.post("/api/comments/createcomments", newComment);
       setContent("");
       fetchComments();
     } catch (error) {
       console.error("Error creating comment:", error);
+    }
+  };
+
+  const openCommentModal = (commentId: string) => {
+    setCommentIdToDelete(commentId);
+    setIsCommentModalOpen(true);
+  };
+
+  const closeCommentModal = () => {
+    setCommentIdToDelete(null);
+    setIsCommentModalOpen(false);
+  };
+
+  const handleDeleteComment = async () => {
+    try {
+      await axios.delete(`/api/comments/delete?id=${commentIdToDelete}`);
+      fetchComments();
+      closeCommentModal();
+    } catch (error) {
+      console.error("Error deleting comment:", error);
     }
   };
 
@@ -58,15 +83,6 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
       fetchComments();
     } catch (error) {
       console.error("Error editing comment:", error);
-    }
-  };
-
-  const handleDeleteComment = async (commentId: string) => {
-    try {
-      await axios.delete(`/api/comments/delete?id=${commentId}`);
-      fetchComments();
-    } catch (error) {
-      console.error("Error deleting comment:", error);
     }
   };
 
@@ -146,19 +162,19 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
                     <div>
                       <button
                         type='button'
-                        className='mr-2'
+                        className='mr-5'
                         style={{ color: "#49a4c4" }}
                         onClick={() => {
                           setEditingCommentId(comment._id);
                           setEditingContent(comment.content);
                         }}
                       >
-                        Edit
+                        Edit Comment
                       </button>
                       <button
                         type='button'
                         style={{ color: "#ff7474" }}
-                        onClick={() => handleDeleteComment(comment._id)}
+                        onClick={() => openCommentModal(comment._id)}
                       >
                         Delete
                       </button>
@@ -170,6 +186,12 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
           </div>
         ))}
       </div>
+      <ConfirmModal
+        isOpen={isCommentModalOpen}
+        onClose={closeCommentModal}
+        onConfirm={handleDeleteComment}
+        entityType='comment'
+      />
     </div>
   );
 };

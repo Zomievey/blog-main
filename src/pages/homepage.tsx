@@ -9,7 +9,8 @@ import Footer from "../components/Footer";
 import "../styles/buttons.css";
 import "../styles/header.css";
 import "../../public/white_heart.png";
-import CreatePost from './createpost';
+import CreatePost from "./createPost";
+
 /* eslint-disable @next/next/no-img-element */
 
 const HomePage = () => {
@@ -105,18 +106,21 @@ const HomePage = () => {
     })}`;
   };
 
-  if (!user)
+  if (!user) {
     return (
       <div>
-        <Navbar />
-        <div className='flex flex-col min-h-screen'>
-          <div className='container mx-auto p-4 flex-grow'>
-            <h2>You are not logged in.</h2>
-          </div>
-          <Footer />
+        <div className='flex justify-center items-center'>
+          <img
+            src='https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWMxNzQwMjBsdGhheTVrdTQ5aDB4dWZzOHU2Y245cmpvbTBuMjdvMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/uBn5A3rxwD7N8nZvlw/giphy.gif'
+            alt='Loading'
+          />
         </div>
+        <h1 className='text-center mt-2' style={{ color: "#49a4c4" }}>
+          You are not logged in...
+        </h1>
       </div>
     );
+  }
 
   return (
     <div className='flex flex-col min-h-screen'>
@@ -190,7 +194,8 @@ const HomePage = () => {
           isOpen={isModalOpen}
           onClose={closeModal}
           onConfirm={handleDeletePost}
-          postTitle={postTitleToDelete}
+          entityType='post'
+          entityTitle={postTitleToDelete}
         />
       </div>
       <Footer />

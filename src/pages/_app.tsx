@@ -3,7 +3,7 @@ import "../app/globals.css";
 import { ComponentType, useEffect } from "react";
 import { useRouter } from "next/router";
 
-const publicRoutes = ["/signup", "/another-public-route"];
+const publicRoutes = ["/signup", "/login"];
 
 function AuthChecker({
   Component,
@@ -16,18 +16,17 @@ function AuthChecker({
   const router = useRouter();
 
   useEffect(() => {
-    if (!loading && !user && !publicRoutes.includes(router.pathname)) {
-      router.push("/login");
+    if (!loading) {
+      if (!user && !publicRoutes.includes(router.pathname)) {
+        router.push("/login");
+      } else if (
+        user &&
+        (router.pathname === "/login" || router.pathname === "/signup")
+      ) {
+        router.push("/");
+      }
     }
   }, [user, loading, router]);
-
-  if (loading && !user) {
-    router.push("/login");
-  }
-
-  if (loading && user) {
-    router.push("/");
-  }
 
   return <Component {...pageProps} />;
 }
