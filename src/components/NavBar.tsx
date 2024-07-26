@@ -8,7 +8,7 @@ export default function Navbar() {
   return (
     <nav className="nav p-6">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="text-white font-bold text-xl">Blog</div>
+        <div className="text-white font-bold text-xl"></div>
         <div className="space-x-4">
           {user && (
             <Link href="/" legacyBehavior>

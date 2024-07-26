@@ -47,10 +47,14 @@ export function AuthProvider({ children }) {
     const docRef = doc(db, "users", uid);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      return docSnap.data().username;
+      const username = docSnap.data().username;
+      console.log(`Fetched username for UID ${uid}:`, username); // Debug log
+      return username;
     }
+    console.log(`No user document found for UID ${uid}`); // Debug log
     return null;
   };
+  
 
   const signin = async (email, password) => {
     const userCredential = await signInWithEmailAndPassword(

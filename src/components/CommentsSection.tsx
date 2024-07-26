@@ -3,7 +3,6 @@ import axios from "axios";
 import { Comment } from "../types";
 import { useAuth } from "../hooks/useAuth";
 import ConfirmModal from "./ConfirmationModal";
-
 import "../styles/buttons.css";
 
 interface CommentSectionProps {
@@ -20,6 +19,7 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
   const [commentIdToDelete, setCommentIdToDelete] = useState<string | null>(
     null
   );
+  const [isLoading, setIsLoading] = useState(false); // Define the isLoading state
 
   useEffect(() => {
     fetchComments();
@@ -65,12 +65,15 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
   };
 
   const handleDeleteComment = async () => {
+    setIsLoading(true); // Set loading state to true
     try {
       await axios.delete(`/api/comments/delete?id=${commentIdToDelete}`);
       fetchComments();
       closeCommentModal();
     } catch (error) {
       console.error("Error deleting comment:", error);
+    } finally {
+      setIsLoading(false); // Set loading state to false
     }
   };
 
@@ -169,7 +172,7 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
                           setEditingContent(comment.content);
                         }}
                       >
-                        Edit Comment
+                        Edit
                       </button>
                       <button
                         type='button'
@@ -191,6 +194,7 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
         onClose={closeCommentModal}
         onConfirm={handleDeleteComment}
         entityType='comment'
+        isLoading={isLoading}
       />
     </div>
   );
