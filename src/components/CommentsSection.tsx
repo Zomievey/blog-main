@@ -3,7 +3,6 @@ import axios from "axios";
 import { Comment } from "../types";
 import { useAuth } from "../hooks/useAuth";
 import "../styles/buttons.css";
-import "../styles/textarea.css";
 
 interface CommentSectionProps {
   postId: string;
@@ -79,7 +78,7 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
           onChange={(e) => setContent(e.target.value)}
           required
           placeholder='Write a comment...'
-          className='w-full p-2 border rounded mt-2 comment-textarea'
+          className='w-full p-2 border rounded mt-2'
         />
         <div className='flex justify-end'>
           <button
@@ -102,7 +101,7 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
             >
               •
             </div>
-            <div>
+            <div className='w-full'>
               {editingCommentId === comment._id ? (
                 <>
                   <textarea
@@ -110,7 +109,7 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
                     onChange={(e) => setEditingContent(e.target.value)}
                     required
                     placeholder='Edit your comment...'
-                    className='w-full p-2 border rounded mt-2 comment-textarea-edit'
+                    className='w-full p-2 border rounded mt-2'
                   />
                   <div className='flex justify-end'>
                     <button

@@ -2,15 +2,15 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../hooks/useAuth";
 import Navbar from "../components/NavBar";
-import CreatePost from "./createpost";
 import ConfirmModal from "../components/ConfirmationModal";
 import { Post } from "../types";
 import CommentSection from "../components/CommentsSection";
+import Footer from "../components/Footer";
 import "../styles/buttons.css";
 import "../styles/header.css";
 import "../../public/white_heart.png";
+import CreatePost from './createpost';
 /* eslint-disable @next/next/no-img-element */
-
 
 const HomePage = () => {
   const { user, role } = useAuth();
@@ -20,7 +20,7 @@ const HomePage = () => {
   const [postTitleToDelete, setPostTitleToDelete] = useState<string | null>(
     null
   );
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true);
 
   const fetchPosts = async () => {
     try {
@@ -105,12 +105,24 @@ const HomePage = () => {
     })}`;
   };
 
-  if (!user) return null;
+  if (!user)
+    return (
+      <div>
+        <Navbar />
+        <div className='flex flex-col min-h-screen'>
+          <div className='container mx-auto p-4 flex-grow'>
+            <h2>You are not logged in.</h2>
+          </div>
+          <Footer />
+        </div>
+      </div>
+    );
 
   return (
-    <div>
+    <div className='flex flex-col min-h-screen'>
       <Navbar />
-      <div className='container mx-auto p-4'>
+
+      <div className='container mx-auto p-4 flex-grow max-w-screen-xlg'>
         <div className='mb-6 p-4 bg-gray-200 rounded flex items-center justify-between header'>
           <div>
             <h2 className='text-lg font-bold'>My Info</h2>
@@ -125,19 +137,28 @@ const HomePage = () => {
             <img src='/white_heart.png' alt='Hearts' className='h-16 w-16' />
           </div>
         </div>
+      </div>
+      <div className='container mx-auto p-4 flex-grow max-w-screen-lg'>
         {role === "admin" && <CreatePost onPostCreated={fetchPosts} />}
         {loading ? (
-          <div className='flex justify-center items-center'>
-            <img
-              src='https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmk3aGpvdHlmNm9jZTZsYXZyejkwZ2dtNzBlbXJsOXB5Znppb2RiciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/IEm8kcqLVCctHJ1kWm/giphy.gif'
-              alt='Loading'
-            />
+          <div>
+            <div className='flex justify-center items-center'>
+              <img
+                src='https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmk3aGpvdHlmNm9jZTZsYXZyejkwZ2dtNzBlbXJsOXB5Znppb2RiciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/IEm8kcqLVCctHJ1kWm/giphy.gif'
+                alt='Loading'
+              />
+            </div>
+            <h1 className='text-center mt-2' style={{ color: "#49a4c4" }}>
+              Fetching posts...
+            </h1>
           </div>
         ) : posts.length === 0 ? (
-          <p>No posts found.</p>
+          <h1 className='text-center mt-2' style={{ color: "#49a4c4" }}>
+            No posts found.
+          </h1>
         ) : (
           posts.map((post) => (
-            <div key={post._id} className='mb-6'>
+            <div key={post._id} className='mb-6 bg-white p-4 rounded shadow-md'>
               <h2 className='text-xl font-bold'>{post.title}</h2>
               <p style={{ whiteSpace: "pre-wrap" }}>{post.content}</p>
               <p className='text-sm text-gray-500'>
@@ -172,6 +193,7 @@ const HomePage = () => {
           postTitle={postTitleToDelete}
         />
       </div>
+      <Footer />
     </div>
   );
 };

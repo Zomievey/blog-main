@@ -6,6 +6,7 @@ import "../styles/signup.css";
 import { ImInfo } from "react-icons/im";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../styles/buttons.css";
+import Footer from "../components/Footer";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -29,9 +30,9 @@ export default function Signup() {
   };
 
   return (
-    <div>
+    <div className='flex flex-col min-h-screen'>
       <Navbar />
-      <div className='flex items-center justify-center min-h-screen bg-gray-100'>
+      <div className='flex-grow flex items-center justify-center bg-gray-100'>
         <div className='bg-white p-8 rounded shadow-md w-full max-w-md'>
           <h1 className='text-2xl font-bold mb-6'>Signup</h1>
           <form onSubmit={handleSignup} className='space-y-4'>
@@ -103,6 +104,7 @@ export default function Signup() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Navbar from "../components/NavBar";
 import "../styles/login.css";
 import "../styles/buttons.css";
+import Footer from "../components/Footer";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -44,9 +45,9 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div className='flex flex-col min-h-screen'>
       <Navbar />
-      <div className='flex items-center justify-center min-h-screen bg-gray-100'>
+      <div className='flex-grow flex items-center justify-center bg-gray-100'>
         <div className='bg-white p-8 rounded shadow-md w-full max-w-md'>
           <h1 className='text-2xl font-bold mb-6'>Login</h1>
           <form onSubmit={handleLogin} className='space-y-4'>
@@ -101,11 +102,14 @@ export default function Login() {
           <div className='tooltip-container flex items-center mt-4'>
             <ImInfo />
             <div className='tooltip ml-2'>
-              All registered users can log in here to access the blog. If you do not already have an account, you can sign up for one by clicking the "Signup" link in the navigation bar.
+              All registered users can log in here to access the blog. If you do
+              not already have an account, you can sign up for one by clicking
+              the "Signup" link in the navigation bar.
             </div>
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
