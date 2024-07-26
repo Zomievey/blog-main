@@ -26,7 +26,7 @@ export default function CreatePost({
         createdAt: new Date().toISOString(),
       };
       console.log('Creating post with data:', newPost);
-      const response = await axios.post('/api/posts/createPost', newPost, {
+      const response = await axios.post('/api/posts/createpost', newPost, {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },

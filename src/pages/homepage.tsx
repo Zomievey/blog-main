@@ -9,7 +9,9 @@ import Footer from "../components/Footer";
 import "../styles/buttons.css";
 import "../styles/header.css";
 import "../../public/white_heart.png";
-import CreatePost from "./createPost";
+import CreatePost from './createpost';
+
+
 
 /* eslint-disable @next/next/no-img-element */
 
