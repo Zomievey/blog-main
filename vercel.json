@@ -1,10 +1,8 @@
 {
     "functions": {
-        "api/posts/createpost": {
-            "maxDuration": 60
-        },
-        "api/posts": {
-            "maxDuration": 60
-        }
+      "api/posts/createpost.ts": {
+        "maxDuration": 60
+      }
     }
-}
+  }
+  
