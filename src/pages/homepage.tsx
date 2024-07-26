@@ -11,8 +11,6 @@ import "../styles/header.css";
 import "../../public/white_heart.png";
 import CreatePost from './createpost';
 
-
-
 /* eslint-disable @next/next/no-img-element */
 
 const HomePage = () => {
@@ -20,10 +18,9 @@ const HomePage = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [postIdToDelete, setPostIdToDelete] = useState<string | null>(null);
-  const [postTitleToDelete, setPostTitleToDelete] = useState<string | null>(
-    null
-  );
+  const [postTitleToDelete, setPostTitleToDelete] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false); // Add isLoading state
 
   const fetchPosts = async () => {
     try {
@@ -79,6 +76,7 @@ const HomePage = () => {
   };
 
   const handleDeletePost = async () => {
+    setIsLoading(true); // Set loading state to true
     try {
       if (!user) {
         throw new Error("User not authenticated");
@@ -96,6 +94,8 @@ const HomePage = () => {
       closeModal();
     } catch (error) {
       console.error("Error deleting post:", error);
+    } finally {
+      setIsLoading(false); // Set loading state to false
     }
   };
 
@@ -197,7 +197,8 @@ const HomePage = () => {
           onClose={closeModal}
           onConfirm={handleDeletePost}
           entityType='post'
-          entityTitle={postTitleToDelete}
+          isLoading={isLoading} 
+          entityTitle={postTitleToDelete} 
         />
       </div>
       <Footer />

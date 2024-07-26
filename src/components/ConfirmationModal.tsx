@@ -8,6 +8,7 @@ interface ConfirmModalProps {
   onConfirm: () => void;
   entityType: string;
   isLoading: boolean; // New loading state
+  entityTitle?: string | null;
 }
 
 const ConfirmModal = ({
