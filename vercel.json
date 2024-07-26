@@ -1,0 +1,10 @@
+{
+    "functions": {
+        "api/posts/createpost": {
+            "maxDuration": 60
+        },
+        "api/posts": {
+            "maxDuration": 60
+        }
+    }
+}
