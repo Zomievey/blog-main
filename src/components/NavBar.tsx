@@ -6,7 +6,7 @@ export default function Navbar() {
   const { user, signout } = useAuth();
 
   return (
-    <nav className="nav p-6">
+    <nav className="nav p-5">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-white font-bold text-xl"></div>
         <div className="space-x-4">
