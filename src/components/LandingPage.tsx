@@ -76,7 +76,7 @@ export default function LandingPage() {
           </div>
         </div>
 
-        <div className='testimonials-section bg-gray-200 p-8 rounded shadow-md w-full max-w-6xl mx-auto mt-8'>
+        <div className='testimonials-section bg-gray-200 p-8 rounded shadow-md w-full max-w-6xl mx-auto mt-8 mb-8'>
           <h2 className='text-3xl font-bold mb-4'>What Our Users Say</h2>
           <div className='testimonials-grid'>
             {suggestions.length > 0 ? (
