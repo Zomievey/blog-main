@@ -111,8 +111,7 @@ export default function Login() {
             <ImInfo />
             <div className='tooltip'>
               All registered users can log in here to access the blog. If you do
-              not already have an account, you can sign up for one by clicking
-              the "Signup" link in the navigation bar.
+              not already have an account, you can signup for one by navigating to the signup page.
             </div>
           </div>
         </div>

@@ -109,7 +109,7 @@ export default function Signup() {
           <div className='tooltip-container'>
             <ImInfo />
             <div className='tooltip'>
-              If you are a new user, sign up here. Once you have signed up, use
+              If you are a new user, signup here. Once you have signed up, use
               the login page to access the blog.
             </div>
           </div>
