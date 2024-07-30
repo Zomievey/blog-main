@@ -26,7 +26,7 @@ const ProtectedRoute = ({
     return null;
   }
 
-  return children;
+  return <>{children}</>;
 };
 
 export default ProtectedRoute;

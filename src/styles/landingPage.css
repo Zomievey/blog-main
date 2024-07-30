@@ -1,0 +1,73 @@
+.hero-section {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: #fa7677; /* Change to solid color */
+  color: white;
+  margin-top: 2rem; /* Add space between navbar and hero section */
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.features-section,
+.testimonials-section {
+  margin-top: 2rem;
+}
+
+.features-grid,
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.feature-item,
+.testimonial-item {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.feature-item h3,
+.testimonial-item p {
+  margin-bottom: 1rem;
+}
+
+.feature-item {
+  color: black;
+}
+
+.btn-custom {
+  background-color: #49a4c4;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+}
+
+.btn-custom:hover {
+  background-color: #4bb2d5;
+}
+
+/* .features-section {
+  background-color: #4bb2d5;
+  color: white;
+} */
+
+/* .testimonials-section {
+  background-color: #4bb2d5;
+  color: white;
+} */
+
+.testimonial-item {
+  color: black;
+}

@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  sendPasswordResetEmail as firebaseSendPasswordResetEmail,
 } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
@@ -54,7 +55,6 @@ export function AuthProvider({ children }) {
     console.log(`No user document found for UID ${uid}`); // Debug log
     return null;
   };
-  
 
   const signin = async (email, password) => {
     const userCredential = await signInWithEmailAndPassword(
@@ -92,6 +92,10 @@ export function AuthProvider({ children }) {
     router.push("/login");
   };
 
+  const sendPasswordResetEmail = async (email) => {
+    return firebaseSendPasswordResetEmail(auth, email);
+  };
+
   if (loading) {
     return (
       <div>
@@ -110,7 +114,15 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, role, signin, signup, signout, getUsername }}
+      value={{
+        user,
+        role,
+        signin,
+        signup,
+        signout,
+        getUsername,
+        sendPasswordResetEmail,
+      }}
     >
       {children}
     </AuthContext.Provider>

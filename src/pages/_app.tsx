@@ -3,7 +3,7 @@ import "../app/globals.css";
 import { ComponentType, useEffect } from "react";
 import { useRouter } from "next/router";
 
-const publicRoutes = ["/signup", "/login"];
+const publicRoutes = ["/signup", "/login", "/resetPassword"];
 
 function AuthChecker({
   Component,

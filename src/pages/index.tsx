@@ -1,6 +1,5 @@
-// src/pages/index.tsx
-import Home from "./homepage";
+import LandingPage from "../components/LandingPage";
 
-export default function Index() {
-  return <Home />;
+export default function Home() {
+  return <LandingPage />;
 }

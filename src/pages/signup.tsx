@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../hooks/useAuth";
 import Navbar from "../components/NavBar";
+import Footer from "../components/Footer";
 import "../styles/signup.css";
 import { ImInfo } from "react-icons/im";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../styles/buttons.css";
-import Footer from "../components/Footer";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -19,6 +19,12 @@ export default function Signup() {
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
+    const passwordPattern = /^(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/;
+    if (!passwordPattern.test(password)) {
+      setSignupStatus("passwordError");
+      return;
+    }
+
     try {
       await signup(email, password, username);
       setSignupStatus("success");
@@ -33,7 +39,7 @@ export default function Signup() {
     <div className='flex flex-col min-h-screen'>
       <Navbar />
       <div className='flex-grow flex items-center justify-center bg-gray-100'>
-        <div className='bg-white p-8 rounded shadow-md w-full max-w-md'>
+        <div className='bg-white p-8 rounded shadow-md w-full max-w-md relative'>
           <h1 className='text-2xl font-bold mb-6'>Signup</h1>
           <form onSubmit={handleSignup} className='space-y-4'>
             <div>
@@ -95,9 +101,14 @@ export default function Signup() {
               Signup failed. Please try again.
             </p>
           )}
-          <div className='tooltip-container flex items-center mt-4'>
+          {signupStatus === "passwordError" && (
+            <p className='mt-4 text-500' style={{ color: "#ff7474" }}>
+              Password must be at least 6 characters long and contain at least one special character.
+            </p>
+          )}
+          <div className='tooltip-container'>
             <ImInfo />
-            <div className='tooltip ml-2'>
+            <div className='tooltip'>
               If you are a new user, sign up here. Once you have signed up, use
               the login page to access the blog.
             </div>

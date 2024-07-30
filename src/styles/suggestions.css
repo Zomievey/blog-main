@@ -1,0 +1,23 @@
+/* Specific styles for the suggestions page */
+.suggestions-container {
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .suggestions-btn-custom {
+    background-color: #ff7474;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .suggestions-btn-custom:hover {
+    background-color: #ff5252;
+  }
+  

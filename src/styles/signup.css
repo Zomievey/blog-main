@@ -1,27 +1,31 @@
 .tooltip-container {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .tooltip {
-    visibility: hidden;
-    width: 220px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    top: 125%; /* Position the tooltip below the icon */
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  
-  .tooltip-container:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
-  }
-  
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  display: inline-block;
+}
+
+.tooltip {
+  visibility: hidden;
+  width: 220px;
+  background-color: #49a3c4d4; /* White background */
+  color: black; /* Black text */
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* Position the tooltip above the icon */
+  left: -585%; /* Adjust this value to position the tooltip inside the frame */
+  transform: translateX(
+    -50%
+  ); /* Adjust this value to position the tooltip inside the frame */
+  opacity: 0;
+  transition: opacity 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Match the login container's box shadow */
+}
+
+.tooltip-container:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}

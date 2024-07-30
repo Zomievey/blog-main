@@ -1,6 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { connectToDatabase } from '../../../utils/mongodb';
+//api/suggestions/suggestions.ts
 
+import type { NextApiRequest, NextApiResponse } from "next";
+import { connectToDatabase } from "../../../utils/mongodb";
 
 export default async function handler(
   req: NextApiRequest,

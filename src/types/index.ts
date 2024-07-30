@@ -19,3 +19,7 @@ export interface Comment {
   username: string;
   createdAt: string;
 }
+
+export interface Suggestion {
+  topic: string;
+}

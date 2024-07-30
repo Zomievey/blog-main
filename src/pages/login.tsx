@@ -7,12 +7,13 @@ import Navbar from "../components/NavBar";
 import "../styles/login.css";
 import "../styles/buttons.css";
 import Footer from "../components/Footer";
+import Link from "next/link";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [loginStatus, setLoginStatus] = useState(""); // State variable for login status
+  const [loginStatus, setLoginStatus] = useState("");
   const { signin } = useAuth();
   const router = useRouter();
 
@@ -32,11 +33,11 @@ export default function Login() {
       if (typeof window !== "undefined") {
         localStorage.setItem("userEmail", email);
       }
-      setLoginStatus("success"); // Set login status to success
+      setLoginStatus("success");
       setTimeout(() => router.push("/"), 2000); // Redirect after 2 seconds
     } catch (error) {
       console.error("Login failed:", error);
-      setLoginStatus("error"); // Set login status to error
+      setLoginStatus("error");
     }
   };
 
@@ -48,7 +49,7 @@ export default function Login() {
     <div className='flex flex-col min-h-screen'>
       <Navbar />
       <div className='flex-grow flex items-center justify-center bg-gray-100'>
-        <div className='bg-white p-8 rounded shadow-md w-full max-w-md'>
+        <div className='bg-white p-8 rounded shadow-md w-full max-w-md relative'>
           <h1 className='text-2xl font-bold mb-6'>Login</h1>
           <form onSubmit={handleLogin} className='space-y-4'>
             <div>
@@ -99,9 +100,16 @@ export default function Login() {
               Incorrect email or password.
             </p>
           )}
-          <div className='tooltip-container flex items-center mt-4'>
+          <div className='mt-4'>
+            <Link href='/resetPassword' legacyBehavior>
+              <a className='hover:underline' style={{ color: "#ff7474" }}>
+                Forgot Password?
+              </a>
+            </Link>
+          </div>
+          <div className='tooltip-container'>
             <ImInfo />
-            <div className='tooltip ml-2'>
+            <div className='tooltip'>
               All registered users can log in here to access the blog. If you do
               not already have an account, you can sign up for one by clicking
               the "Signup" link in the navigation bar.
