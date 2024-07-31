@@ -48,70 +48,61 @@ export default function Login() {
   return (
     <div className='flex flex-col min-h-screen'>
       <Navbar />
-      <div className='flex-grow flex items-center justify-center bg-gray-100'>
-        <div className='bg-white p-8 rounded shadow-md w-full max-w-md relative'>
-          <h1 className='text-2xl font-bold mb-6'>Login</h1>
+      <div className='flex-grow flex items-center justify-center'>
+        <div className='auth-container'>
+          <h1>Login</h1>
           <form onSubmit={handleLogin} className='space-y-4'>
             <div>
-              <label className='block text-sm font-medium'>Email</label>
+              <label>Email</label>
               <input
                 title='email'
                 type='email'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className='w-full p-2 border rounded'
               />
             </div>
-            <div>
-              <label className='block text-sm font-medium'>Password</label>
-              <div className='relative'>
-                <input
-                  title='password'
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  className='w-full p-2 border rounded pr-10'
-                />
-                <button
-                  type='button'
-                  onClick={togglePasswordVisibility}
-                  className='absolute right-2 top-3 text-gray-500'
-                >
-                  {showPassword ? <FaEye /> : <FaEyeSlash />}
-                </button>
+            <div className='relative'>
+              <label>Password</label>
+              <input
+                title='password'
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <div
+                className='password-toggle'
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? <FaEye /> : <FaEyeSlash />}
               </div>
             </div>
-            <button
-              type='submit'
-              className='px-4 py-2 bg-blue-500 text-white rounded btn-custom'
-            >
+            <button type='submit' className='btn-custom'>
               Login
             </button>
           </form>
           {loginStatus === "success" && (
-            <p className='mt-4 text-500' style={{ color: "#49a4c4" }}>
+            <p className='mt-4' style={{ color: "#49a4c4" }}>
               Login successful! Redirecting...
             </p>
           )}
           {loginStatus === "error" && (
-            <p className='mt-4 text-500' style={{ color: "#ff7474" }}>
+            <p className='mt-4' style={{ color: "#fa7677" }}>
               Incorrect email or password.
             </p>
           )}
           <div className='mt-4'>
             <Link href='/resetPassword' legacyBehavior>
-              <a className='hover:underline' style={{ color: "#ff7474" }}>
-                Forgot Password?
-              </a>
+              <a className='forgot-password'>Forgot Password?</a>
             </Link>
           </div>
           <div className='tooltip-container'>
-            <ImInfo />
+            <ImInfo className='info-icon' />
             <div className='tooltip'>
               All registered users can log in here to access the blog. If you do
-              not already have an account, you can signup for one by navigating to the signup page.
+              not already have an account, you can sign up for one by navigating
+              to the signup page.
             </div>
           </div>
         </div>

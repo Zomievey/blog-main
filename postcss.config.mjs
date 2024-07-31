@@ -1,11 +1,7 @@
-// postcss.config.mjs
-import tailwindcss from 'tailwindcss';
-
-const config = {
-  plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
-  },
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
 };
 
-export default config;
+export default nextConfig;

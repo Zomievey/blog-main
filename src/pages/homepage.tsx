@@ -9,7 +9,7 @@ import Footer from "../components/Footer";
 import "../styles/buttons.css";
 import "../styles/header.css";
 import "../../public/white_heart.png";
-import CreatePost from './createpost';
+import CreatePost from "./createpost";
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -18,9 +18,11 @@ const HomePage = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [postIdToDelete, setPostIdToDelete] = useState<string | null>(null);
-  const [postTitleToDelete, setPostTitleToDelete] = useState<string | null>(null);
+  const [postTitleToDelete, setPostTitleToDelete] = useState<string | null>(
+    null
+  );
   const [loading, setLoading] = useState(true);
-  const [isLoading, setIsLoading] = useState(false); // Add isLoading state
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchPosts = async () => {
     try {
@@ -30,7 +32,7 @@ const HomePage = () => {
     } catch (error) {
       console.error("Error fetching posts:", error);
     } finally {
-      setLoading(false); // Set loading to false after fetching posts
+      setLoading(false);
     }
   };
 
@@ -76,7 +78,7 @@ const HomePage = () => {
   };
 
   const handleDeletePost = async () => {
-    setIsLoading(true); // Set loading state to true
+    setIsLoading(true);
     try {
       if (!user) {
         throw new Error("User not authenticated");
@@ -95,7 +97,7 @@ const HomePage = () => {
     } catch (error) {
       console.error("Error deleting post:", error);
     } finally {
-      setIsLoading(false); // Set loading state to false
+      setIsLoading(false);
     }
   };
 
@@ -110,13 +112,12 @@ const HomePage = () => {
 
   if (!user) {
     return (
-      <div>
-        <div className='flex justify-center items-center'>
-          <img
-            src='https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWMxNzQwMjBsdGhheTVrdTQ5aDB4dWZzOHU2Y245cmpvbTBuMjdvMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/uBn5A3rxwD7N8nZvlw/giphy.gif'
-            alt='Loading'
-          />
-        </div>
+      <div className='flex flex-col items-center justify-center min-h-screen'>
+        <img
+          src='https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWMxNzQwMjBsdGhheTVrdTQ5aDB4dWZzOHU2Y245cmpvbTBuMjdvMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/uBn5A3rxwD7N8nZvlw/giphy.gif'
+          alt='Loading'
+          className='w-48 h-48'
+        />
         <h1 className='text-center mt-2' style={{ color: "#49a4c4" }}>
           You are not logged in...
         </h1>
@@ -128,8 +129,8 @@ const HomePage = () => {
     <div className='flex flex-col min-h-screen'>
       <Navbar />
 
-      <div className='container mx-auto p-4 flex-grow max-w-screen-xlg'>
-        <div className='mb-6 p-4 bg-gray-200 rounded flex items-center justify-between header'>
+      <div className='container mx-auto p-4 flex-grow max-w-screen-lg'>
+        <div className='mb-6 p-4 card rounded flex items-center justify-between header'>
           <div>
             <h2 className='text-lg font-bold'>My Info</h2>
             <p>
@@ -143,17 +144,16 @@ const HomePage = () => {
             <img src='/white_heart.png' alt='Hearts' className='h-16 w-16' />
           </div>
         </div>
-      </div>
-      <div className='container mx-auto p-4 flex-grow max-w-screen-lg'>
+
         {role === "admin" && <CreatePost onPostCreated={fetchPosts} />}
+
         {loading ? (
-          <div>
-            <div className='flex justify-center items-center'>
-              <img
-                src='https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmk3aGpvdHlmNm9jZTZsYXZyejkwZ2dtNzBlbXJsOXB5Znppb2RiciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/IEm8kcqLVCctHJ1kWm/giphy.gif'
-                alt='Loading'
-              />
-            </div>
+          <div className='flex flex-col items-center justify-center'>
+            <img
+              src='https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmk3aGpvdHlmNm9jZTZsYXZyejkwZ2dtNzBlbXJsOXB5Znppb2RiciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/IEm8kcqLVCctHJ1kWm/giphy.gif'
+              alt='Loading'
+              className='w-48 h-48'
+            />
             <h1 className='text-center mt-2' style={{ color: "#49a4c4" }}>
               Fetching posts...
             </h1>
@@ -164,25 +164,43 @@ const HomePage = () => {
           </h1>
         ) : (
           posts.map((post) => (
-            <div key={post._id} className='mb-6 bg-white p-4 rounded shadow-md'>
-              <h2 className='text-xl font-bold'>{post.title}</h2>
-              <p style={{ whiteSpace: "pre-wrap" }}>{post.content}</p>
+            <div key={post._id} className='mb-6 p-4 card rounded shadow-md'>
+              <h2
+                className='text-xl font-bold'
+                style={{ color: "var(--text-color-dark)" }}
+              >
+                {post.title}
+              </h2>
+              <p
+                style={{
+                  whiteSpace: "pre-wrap",
+                  color: "var(--text-color-dark)",
+                }}
+              >
+                {post.content}
+              </p>
               <p className='text-sm text-gray-500'>
                 {post.author} - {formatTimestamp(post.createdAt)}
               </p>
-              <div className='flex justify-between items-center'>
-                <div className='flex items-center'>
-                  <button onClick={() => handleLike(post._id)} className='mr-2'>
+              <div className='flex justify-between items-center mt-4'>
+                <div className='flex items-center space-x-2'>
+                  <button
+                    onClick={() => handleLike(post._id)}
+                    className='btn-custom-like'
+                  >
                     ❤️ {post.likesCount || 0}
                   </button>
-                  <button onClick={() => handleDislike(post._id)}>
+                  <button
+                    onClick={() => handleDislike(post._id)}
+                    className='btn-custom-dislike'
+                  >
                     👎 {post.dislikesCount || 0}
                   </button>
                 </div>
                 {role === "admin" && (
                   <button
                     onClick={() => openModal(post._id, post.title)}
-                    className='text-red-500 btn-custom-cancel'
+                    className='btn-custom-cancel'
                   >
                     Delete Post
                   </button>
@@ -197,10 +215,11 @@ const HomePage = () => {
           onClose={closeModal}
           onConfirm={handleDeletePost}
           entityType='post'
-          isLoading={isLoading} 
-          entityTitle={postTitleToDelete} 
+          isLoading={isLoading}
+          entityTitle={postTitleToDelete}
         />
       </div>
+
       <Footer />
     </div>
   );

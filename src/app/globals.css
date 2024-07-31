@@ -3,31 +3,588 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --primary-color: #aec4d8;
+  --secondary-color: #ccddf0;
+  --accent-color: #dfcfd2;
+  --dark-primary-color: #7e899f;
+  --dark-secondary-color: #ff7474;
+  --light-accent-color: #ffbebe;
+  --text-color-light: #fff;
+  --text-color-dark: #000;
+  --card-background-light: #f2f3f7;
+  --card-background-dark: #313137;
+  --nav-link-color: var(--text-color-dark);
+  --icon-fill: black;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+[data-theme="dark"] {
+  --primary-color: #313137;
+  --secondary-color: #7e899f;
+  --accent-color: #fa7677;
+  --text-color-light: #fff;
+  --text-color-dark: #fff;
+  --card-background-dark: #313137;
+  --nav-link-color: var(--text-color-light);
+  --icon-fill: white;
 }
-
-/* src/app/globals.css */
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
+  background-color: var(--primary-color);
+  color: var(--text-color-dark);
 }
-/* Add other global styles here */
 
+.container {
+  background-color: var(--secondary-color);
+}
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+.card {
+  background-color: var(--card-background-light);
+  color: var(--text-color-dark);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .card {
+  background-color: var(--card-background-dark);
+  color: var(--text-color-light);
+}
+
+.hero-section {
+  position: relative;
+  height: 80vh;
+  background-color: var(--secondary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: var(--text-color-dark);
+  text-align: left;
+  padding: 2rem;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.hero-title {
+  font-family: "Arial", sans-serif;
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("/hero-background.jpg") center/cover no-repeat;
+  opacity: 0.5;
+  animation: scaleBg 15s infinite alternate;
+  z-index: 1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
+
+@keyframes scaleBg {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: var(--secondary-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+}
+
+.grid-item {
+  color: var(--text-color-dark);
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.grid-item:hover {
+  transform: translateY(-5px);
+}
+
+.large-tile {
+  grid-column: span 2;
+  grid-row: span 2;
+  background-color: #dfcfd2;
+}
+
+.medium-tile {
+  grid-column: span 1;
+  grid-row: span 2;
+  background-color: #7e899f;
+}
+
+.small-tile {
+  grid-column: span 1;
+  grid-row: span 1;
+  background-color: #aec4d8;
+}
+
+/* Dark mode styles */
+[data-theme="dark"] .grid-item {
+  background-color: var(--card-background-dark);
+  color: var(--text-color-light);
+}
+
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, 300px); /* Adjust row height for mobile */
+  }
+}
+
+.testimonials-section {
+  padding: 2rem;
+  border-radius: 15px;
+  max-width: 50%;
+  height: 7rem;
+  margin: 2rem auto;
+  /* background-color: var(--secondary-color); */
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  align-items: center; /* Centers items horizontally */
+  justify-content: center; /* Centers items vertically */
+}
+
+.testimonials-section h2 {
+  margin-bottom: 1rem; /* Adds space below the h2 */
+  margin-top: 1rem; /* Adds space below the h2 */
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.testimonial {
+  font-size: 1.5rem;
+  color: var(--text-color-dark);
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out, visibility 1.5s ease-in-out; /* Smooth fade-in and fade-out */
+  visibility: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centers the testimonial */
+}
+
+.testimonial.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+[data-theme="dark"] .testimonials-section {
+  /* background-color: var(--dark-primary-color); */
+  color: var(--text-color-light);
+}
+
+[data-theme="dark"] .testimonial {
+  color: var(--text-color-light);
+}
+
+.btn-custom,
+.btn-custom-cancel {
+  background-color: var(--dark-primary-color); /* Default background color */
+  border: none;
+  color: var(--text-color-dark); /* Text color black in light mode */
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.75rem 1.5rem;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 8px;
+}
+
+[data-theme="dark"] .btn-custom,
+[data-theme="dark"] .btn-custom-cancel {
+  background-color: #aec4d8; /* Background color in dark mode */
+  color: var(--text-color-light); /* Text color white in dark mode */
+}
+
+.btn-custom:hover,
+.btn-custom-cancel:hover {
+  background-color: #dfcfd2; /* Hover background color */
+}
+
+.nav {
+  background-color: var(--primary-color);
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+/* Landing page specific navbar styles */
+.nav-landing {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+  background: transparent;
+}
+
+.navbar-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav a,
+.nav button {
+  color: var(--nav-link-color);
+  cursor: pointer;
+  transition: color 0.3s ease;
+  padding: 0 1rem;
+  text-decoration: none;
+  font-family: "Arial", sans-serif;
+  font-size: 1.5rem;
+}
+
+.nav a:hover,
+.nav button:hover {
+  color: #dfcfd2;
+}
+
+.nav button {
+  background: none;
+  border: none;
+}
+
+.footer {
+  background-color: var(--primary-color);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color-dark);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.modal-content {
+  background-color: var(--secondary-color);
+  color: var(--text-color-dark);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+@import "https://unpkg.com/open-props/easings.min.css";
+
+.sun-and-moon > :is(.moon, .sun, .sun-beams) {
+  transform-origin: center;
+}
+
+.sun-and-moon > .sun {
+  fill: var(--icon-fill, white);
+}
+
+.sun-and-moon > .moon > circle {
+  fill: black;
+}
+
+.theme-toggle:is(:hover, :focus-visible) > .sun-and-moon > :is(.moon, .sun) {
+  fill: var(--icon-fill-hover, white);
+}
+
+.sun-and-moon > .sun-beams {
+  stroke: var(--icon-fill, white);
+  stroke-width: 2px;
+}
+
+.theme-toggle:is(:hover, :focus-visible) .sun-and-moon > .sun-beams {
+  stroke: var(--icon-fill-hover, white);
+}
+
+[data-theme="dark"] .sun-and-moon > .sun {
+  transform: scale(1.75);
+  fill: white;
+}
+
+[data-theme="dark"] .sun-and-moon > .sun-beams {
+  opacity: 0;
+}
+
+[data-theme="dark"] .sun-and-moon > .moon > circle {
+  transform: translateX(-7px);
+}
+
+@supports (cx: 1) {
+  [data-theme="dark"] .sun-and-moon > .moon > circle {
+    cx: 17;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sun-and-moon > .sun {
+    transition: transform 0.5s var(--ease-elastic-3);
+  }
+
+  .sun-and-moon > .sun-beams {
+    transition: transform 0.5s var(--ease-elastic-4), opacity 0.5s var(--ease-3);
+  }
+
+  .sun-and-moon .moon > circle {
+    transition: transform 0.25s var(--ease-out-5);
+  }
+
+  @supports (cx: 1) {
+    .sun-and-moon .moon > circle {
+      transition: cx 0.25s var(--ease-out-5);
+    }
+  }
+
+  [data-theme="dark"] .sun-and-moon > .sun {
+    transition-timing-function: var(--ease-3);
+    transition-duration: 0.25s;
+    transform: scale(1.75);
+  }
+
+  [data-theme="dark"] .sun-and-moon > .sun-beams {
+    transition-duration: 0.15s;
+    transform: rotateZ(-25deg);
+  }
+
+  [data-theme="dark"] .sun-and-moon > .moon > circle {
+    transition-duration: 0.5s;
+    transition-delay: 0.25s;
+  }
+}
+
+
+/* Tooltip Container */
+.tooltip-container {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Tooltip */
+.tooltip {
+  visibility: hidden;
+  width: 200px;
+  background-color: var(--card-background-light);
+  color: var(--text-color-dark);
+  text-align: left;
+  border-radius: 5px;
+  padding: 0.5rem;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Show tooltip on hover */
+.tooltip-container:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Password Toggle */
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 48px;
+  cursor: pointer;
+  color: var(--text-color-dark);
+}
+
+/* Adjust for dark mode */
+[data-theme="dark"] .tooltip {
+  background-color: var(--card-background-dark);
+  color: var(--text-color-light);
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1); /* Adjust shadow color for visibility */
+}
+
+[data-theme="dark"] .password-toggle {
+  color: var(--text-color-light);
+}
+
+/* Apply the styles */
+.auth-container {
+  background-color: var(--card-background-light);
+  color: var(--text-color-dark);
+  border-radius: 10px;
+  padding: 2rem;
+  margin: 2rem auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+[data-theme="dark"] .auth-container {
+  background-color: #7e899f; /* Set background color to #7e899f in dark mode */
+  color: var(--text-color-light);
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1); /* Adjust shadow color for visibility */
+}
+
+.auth-container h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: var(--text-color-dark);
+}
+
+[data-theme="dark"] .auth-container h1 {
+  color: var(--text-color-light);
+}
+
+.auth-container label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: medium;
+  color: var(--text-color-dark);
+}
+
+[data-theme="dark"] .auth-container label {
+  color: var(--text-color-light);
+}
+
+.auth-container input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 1.5rem;
+  box-sizing: border-box;
+  background-color: var(--card-background-light);
+  color: var(--text-color-dark);
+}
+
+[data-theme="dark"] .auth-container input {
+  background-color: var(--card-background-dark);
+  color: var(--text-color-light);
+}
+
+.auth-container input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+.auth-container button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--dark-primary-color);
+  color: var(--text-color-light);
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.auth-container button:hover {
+  background-color: #dfcfd2; /* Maintain the same hover color in both light and dark modes */
+}
+
+.forgot-password:hover {
+  color: #dfcfd2;
+}
+
+.auth-container .password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 48px;
+  cursor: pointer;
+  color: #555;
+}
+
+[data-theme="dark"] .password-toggle {
+  color: var(--text-color-light);
+}
+
+/* Adjustments for mobile */
+@media (max-width: 768px) {
+  .auth-container {
+    padding: 1.5rem;
+  }
+}
+
+.auth-container input {
+  width: 375px; /* Ensure the input takes the full width of the parent container */
+  max-width: 600px; /* Adjust this value to make the input fields longer */
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 1.5rem;
+  box-sizing: border-box;
+  background-color: var(--card-background-light);
+  color: var(--text-color-dark);
+}
+
+[data-theme="dark"] .auth-container input {
+  background-color: var(--card-background-dark);
+  color: var(--text-color-light);
+}
+

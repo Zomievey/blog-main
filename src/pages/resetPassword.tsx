@@ -25,37 +25,33 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className='flex flex-col min-h-screen'>
       <Navbar />
-      <div className="flex-grow flex items-center justify-center bg-gray-100">
-        <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-          <h1 className="text-2xl font-bold mb-6">Reset Password</h1>
-          <form onSubmit={handlePasswordReset} className="space-y-4">
+      <div className='flex-grow flex items-center justify-center'>
+        <div className='auth-container'>
+          <h1>Reset Password</h1>
+          <form onSubmit={handlePasswordReset} className='space-y-4'>
             <div>
-              <label className="block text-sm font-medium">Email</label>
+              <label>Email</label>
               <input
-                title="email"
-                type="email"
+                title='email'
+                type='email'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full p-2 border rounded"
               />
             </div>
-            <button
-              type="submit"
-              className="px-4 py-2 bg-blue-500 text-white rounded btn-custom"
-            >
+            <button type='submit' className='btn-custom'>
               Reset Password
             </button>
           </form>
           {status === "success" && (
-            <p className="mt-4 text-500" style={{ color: "#49a4c4" }}>
+            <p className='mt-4' style={{ color: "#49a4c4" }}>
               Password reset email sent! Redirecting to login...
             </p>
           )}
           {status === "error" && (
-            <p className="mt-4 text-500" style={{ color: "#ff7474" }}>
+            <p className='mt-4' style={{ color: "#ff7474" }}>
               Failed to send password reset email. Please try again.
             </p>
           )}

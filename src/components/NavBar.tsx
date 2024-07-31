@@ -1,34 +1,34 @@
 import Link from "next/link";
 import { useAuth } from "../hooks/useAuth";
-import "../styles/navbar.css";
+import ThemeToggle from "./ThemeToggle";
 
-export default function Navbar() {
+export default function Navbar({ isLandingPage = false }) {
   const { user, signout } = useAuth();
 
   return (
-    <nav className="nav p-5">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="text-white font-bold text-xl"></div>
-        <div className="space-x-4">
+    <nav className={`nav ${isLandingPage ? "nav-landing" : ""} p-5`}>
+      <div className='navbar-container flex-end items-center'>
+        <div className='flex items-center'>
           {user && (
-            <Link href="/" legacyBehavior>
-              <a className="text-white">Home</a>
+            <Link href='/' legacyBehavior>
+              <a className='nav-link text-white'>Home</a>
             </Link>
           )}
           {user ? (
-            <button onClick={signout} className="text-white">
+            <button onClick={signout} className='nav-link text-white'>
               Logout
             </button>
           ) : (
             <>
-              <Link href="/login" legacyBehavior>
-                <a className="text-white">Login</a>
+              <Link href='/login' legacyBehavior>
+                <a className='nav-link text-white'>Login</a>
               </Link>
-              <Link href="/signup" legacyBehavior>
-                <a className="text-white">Signup</a>
+              <Link href='/signup' legacyBehavior>
+                <a className='nav-link text-white'>Signup</a>
               </Link>
             </>
           )}
+          <ThemeToggle />
         </div>
       </div>
     </nav>
