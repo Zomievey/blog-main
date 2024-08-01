@@ -92,7 +92,7 @@ export default function Login() {
               Incorrect email or password.
             </p>
           )}
-          <div className='mt-4'>
+          <div className='mt-4 signup-btn'>
             <Link href='/resetPassword' legacyBehavior>
               <a className='forgot-password'>Forgot Password?</a>
             </Link>
@@ -101,7 +101,7 @@ export default function Login() {
             <ImInfo className='info-icon' />
             <div className='tooltip'>
               All registered users can log in here to access the blog. If you do
-              not already have an account, you can sign up for one by navigating
+              not already have an account, you can signup for one by navigating
               to the signup page.
             </div>
           </div>

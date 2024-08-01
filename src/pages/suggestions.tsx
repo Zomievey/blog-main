@@ -26,7 +26,7 @@ export default function Suggestions() {
   return (
     <div className='flex flex-col min-h-screen'>
       <Navbar />
-      <div className='flex-grow bg-gray-100 p-8'>
+      <div className='flex-grow p-8'>
         <div className='suggestions-container mx-auto p-4 bg-white rounded shadow-md'>
           <h1 className='text-2xl font-bold mb-4'>Feedback</h1>
           <form onSubmit={handleSubmit} className='my-4'>

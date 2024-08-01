@@ -128,7 +128,7 @@ export default function LandingPage() {
               key={index}
               className={`testimonial ${index === activeIndex ? "active" : ""}`}
             >
-              <p>{`"${suggestion.topic}" - User ${index + 1}`}</p>
+              <p>{`"${suggestion.topic}"`}</p>
             </div>
           ))}
         </div>

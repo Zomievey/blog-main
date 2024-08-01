@@ -19,8 +19,9 @@
 
 [data-theme="dark"] {
   --primary-color: #313137;
+  --primary-color-dark: #aec4d8;
   --secondary-color: #7e899f;
-  --accent-color: #fa7677;
+  --accent-color: #dfcfd2;
   --text-color-light: #fff;
   --text-color-dark: #fff;
   --card-background-dark: #313137;
@@ -53,6 +54,8 @@ body {
   background-color: var(--card-background-dark);
   color: var(--text-color-light);
 }
+
+/************************Landing Page Styles */
 
 .hero-section {
   position: relative;
@@ -174,7 +177,6 @@ body {
   background-color: #aec4d8;
 }
 
-/* Dark mode styles */
 [data-theme="dark"] .grid-item {
   background-color: var(--card-background-dark);
   color: var(--text-color-light);
@@ -183,7 +185,7 @@ body {
 @media (max-width: 768px) {
   .grid-container {
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(6, 300px); /* Adjust row height for mobile */
+    grid-template-rows: repeat(6, 300px);
   }
 }
 
@@ -193,18 +195,17 @@ body {
   max-width: 50%;
   height: 7rem;
   margin: 2rem auto;
-  /* background-color: var(--secondary-color); */
   position: relative;
   overflow: hidden;
   text-align: center;
   display: flex;
-  align-items: center; /* Centers items horizontally */
-  justify-content: center; /* Centers items vertically */
+  align-items: center;
+  justify-content: center;
 }
 
 .testimonials-section h2 {
-  margin-bottom: 1rem; /* Adds space below the h2 */
-  margin-top: 1rem; /* Adds space below the h2 */
+  margin-bottom: 1rem;
+  margin-top: 1rem;
   position: absolute;
   top: 0;
   left: 50%;
@@ -215,12 +216,12 @@ body {
   font-size: 1.5rem;
   color: var(--text-color-dark);
   opacity: 0;
-  transition: opacity 1.5s ease-in-out, visibility 1.5s ease-in-out; /* Smooth fade-in and fade-out */
+  transition: opacity 1.5s ease-in-out, visibility 1.5s ease-in-out;
   visibility: hidden;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Centers the testimonial */
+  transform: translate(-50%, -50%);
 }
 
 .testimonial.active {
@@ -229,7 +230,6 @@ body {
 }
 
 [data-theme="dark"] .testimonials-section {
-  /* background-color: var(--dark-primary-color); */
   color: var(--text-color-light);
 }
 
@@ -237,11 +237,13 @@ body {
   color: var(--text-color-light);
 }
 
+/********************************Button Styles */
+
 .btn-custom,
 .btn-custom-cancel {
-  background-color: var(--dark-primary-color); /* Default background color */
+  background-color: var(--dark-primary-color);
   border: none;
-  color: var(--text-color-dark); /* Text color black in light mode */
+  color: var(--text-color-dark);
   cursor: pointer;
   font-size: 1.2rem;
   padding: 0.75rem 1.5rem;
@@ -253,13 +255,13 @@ body {
 
 [data-theme="dark"] .btn-custom,
 [data-theme="dark"] .btn-custom-cancel {
-  background-color: #aec4d8; /* Background color in dark mode */
-  color: var(--text-color-light); /* Text color white in dark mode */
+  background-color: #aec4d8;
+  color: var(--text-color-light);
 }
 
 .btn-custom:hover,
 .btn-custom-cancel:hover {
-  background-color: #dfcfd2; /* Hover background color */
+  background-color: #dfcfd2;
 }
 
 .nav {
@@ -269,7 +271,8 @@ body {
   align-items: center;
 }
 
-/* Landing page specific navbar styles */
+/*************************Navbar Landing Page Styles */
+
 .nav-landing {
   position: absolute;
   width: 100%;
@@ -278,12 +281,12 @@ body {
   background: transparent;
 }
 
+/***************************************Navbar Styles */
+
 .navbar-container {
   width: 100%;
   margin: 0 auto;
-  padding: 0 1rem;
   display: flex;
-  justify-content: flex-end;
 }
 
 .nav a,
@@ -291,7 +294,7 @@ body {
   color: var(--nav-link-color);
   cursor: pointer;
   transition: color 0.3s ease;
-  padding: 0 1rem;
+  padding: 8px;
   text-decoration: none;
   font-family: "Arial", sans-serif;
   font-size: 1.5rem;
@@ -307,6 +310,8 @@ body {
   border: none;
 }
 
+/***************************************Footer styles */
+
 .footer {
   background-color: var(--primary-color);
   height: 60px;
@@ -320,12 +325,16 @@ body {
   text-wrap: balance;
 }
 
+/***************************************Modal Styles */
+
 .modal-content {
   background-color: var(--secondary-color);
   color: var(--text-color-dark);
   border-radius: 10px;
   padding: 1rem;
 }
+
+/**********************************Dark Mode Toggle Styles */
 
 @import "https://unpkg.com/open-props/easings.min.css";
 
@@ -410,18 +419,12 @@ body {
   }
 }
 
-
-/* Tooltip Container */
+/*************************************************Tooltip Styles */
 .tooltip-container {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
+  position: relative; /* Change from absolute to relative */
+  margin-top: 10px; /* Add some space above */
 }
 
-/* Tooltip */
 .tooltip {
   visibility: hidden;
   width: 200px;
@@ -431,8 +434,7 @@ body {
   border-radius: 5px;
   padding: 0.5rem;
   position: absolute;
-  z-index: 1;
-  bottom: 100%;
+  bottom: 100%; /* Position above the icon */
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;
@@ -440,13 +442,11 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Show tooltip on hover */
 .tooltip-container:hover .tooltip {
   visibility: visible;
   opacity: 1;
 }
-
-/* Password Toggle */
+/*********************** Hide Password Toggle */
 .password-toggle {
   position: absolute;
   right: 10px;
@@ -455,37 +455,65 @@ body {
   color: var(--text-color-dark);
 }
 
-/* Adjust for dark mode */
 [data-theme="dark"] .tooltip {
   background-color: var(--card-background-dark);
   color: var(--text-color-light);
-  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1); /* Adjust shadow color for visibility */
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
 }
 
 [data-theme="dark"] .password-toggle {
   color: var(--text-color-light);
 }
 
-/* Apply the styles */
+/************************************Login and Signup styles */
+/* .flex-grow {
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+} */
+
 .auth-container {
-  background-color: var(--card-background-light);
-  color: var(--text-color-dark);
-  border-radius: 10px;
-  padding: 2rem;
-  margin: 2rem auto;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 450px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
+  justify-content: center;
+  padding: 2rem;
+  max-width: 450px; /* Maximum width for larger screens */
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: var(--card-background-light);
+  border-radius: 10px;
+}
+
+.auth-container input {
+  width: 375px; /* Make inputs full-width by default */
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 1.5rem;
+  box-sizing: border-box;
+  background-color: var(--card-background-light);
+  color: var(--text-color-dark);
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  .auth-container {
+    padding: 1.5rem;
+    max-width: 90%; /* Use percentage width to allow flexibility on smaller screens */
+    width: 100%;
+  }
+
+  .auth-container input {
+    max-width: 300px; /* Limit max width even further on mobile */
+  }
 }
 
 [data-theme="dark"] .auth-container {
-  background-color: #7e899f; /* Set background color to #7e899f in dark mode */
+  background-color: #7e899f;
   color: var(--text-color-light);
-  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1); /* Adjust shadow color for visibility */
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
 }
 
 .auth-container h1 {
@@ -511,20 +539,9 @@ body {
   color: var(--text-color-light);
 }
 
-.auth-container input {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 1.5rem;
-  box-sizing: border-box;
-  background-color: var(--card-background-light);
-  color: var(--text-color-dark);
-}
-
 [data-theme="dark"] .auth-container input {
   background-color: var(--card-background-dark);
-  color: var(--text-color-light);
+  color: var (--text-color-light);
 }
 
 .auth-container input:focus {
@@ -545,11 +562,15 @@ body {
 }
 
 .auth-container button:hover {
-  background-color: #dfcfd2; /* Maintain the same hover color in both light and dark modes */
+  background-color: #dfcfd2;
 }
 
 .forgot-password:hover {
   color: #dfcfd2;
+}
+
+.signup-btn {
+  margin-bottom: 20px !important;
 }
 
 .auth-container .password-toggle {
@@ -564,27 +585,105 @@ body {
   color: var(--text-color-light);
 }
 
-/* Adjustments for mobile */
-@media (max-width: 768px) {
-  .auth-container {
-    padding: 1.5rem;
-  }
+/*******************************Suggestions Page Styles */
+
+.suggestions-container {
+  background-color: var(--card-background-light);
+  color: var(--text-color-dark);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 2rem auto;
 }
 
-.auth-container input {
-  width: 375px; /* Ensure the input takes the full width of the parent container */
-  max-width: 600px; /* Adjust this value to make the input fields longer */
+[data-theme="dark"] .suggestions-container {
+  background-color: var(--secondary-color);
+  color: var(--text-color-light);
+}
+
+.suggestions-container input[type="text"] {
+  width: 100%;
   padding: 0.75rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--accent-color);
   border-radius: 5px;
-  margin-bottom: 1.5rem;
-  box-sizing: border-box;
+  margin-bottom: 1rem;
   background-color: var(--card-background-light);
   color: var(--text-color-dark);
 }
 
-[data-theme="dark"] .auth-container input {
+[data-theme="dark"] .suggestions-container input[type="text"] {
   background-color: var(--card-background-dark);
   color: var(--text-color-light);
 }
 
+.suggestions-btn-custom {
+  background-color: var(--dark-primary-color);
+  color: var(--text-color-dark);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.suggestions-btn-custom:hover {
+  background-color: var(--accent-color);
+}
+
+[data-theme="dark"] .suggestions-btn-custom {
+  background-color: var(--primary-color-dark);
+  color: var(--text-color-dark);
+}
+
+[data-theme="dark"] .suggestions-btn-custom:hover {
+  background-color: var(--accent-color);
+}
+
+.suggestions-container .message {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: var(--text-color-dark);
+}
+
+[data-theme="dark"] .suggestions-container .message {
+  color: var(--text-color-light);
+}
+
+.suggestions-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--primary-color);
+}
+
+.suggestions-content {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+[data-theme="dark"] .suggestions-page {
+  background-color: var(--card-background-dark);
+}
+
+[data-theme="dark"] .suggestions-content {
+  background-color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .suggestions-container {
+    padding: 1rem;
+  }
+
+  .suggestions-container input[type="text"] {
+    padding: 0.5rem;
+  }
+
+  .suggestions-btn-custom {
+    padding: 0.5rem 1rem;
+  }
+}

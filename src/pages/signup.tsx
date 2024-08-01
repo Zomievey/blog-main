@@ -78,7 +78,7 @@ export default function Signup() {
                 {showPassword ? <FaEye /> : <FaEyeSlash />}
               </div>
             </div>
-            <button type='submit' className='btn-custom'>
+            <button type='submit' className='btn-custom signup-btn'>
               Signup
             </button>
           </form>
@@ -101,7 +101,7 @@ export default function Signup() {
           <div className='tooltip-container'>
             <ImInfo className='info-icon' />
             <div className='tooltip'>
-              If you are a new user, sign up here. Once you have signed up, use
+              If you are a new user, signup here. Once you have signed up, use
               the login page to access the blog.
             </div>
           </div>
