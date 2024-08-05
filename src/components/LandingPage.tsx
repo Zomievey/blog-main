@@ -4,13 +4,14 @@ import Link from "next/link";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useState, useEffect } from "react";
-import Lightbox from "react-image-lightbox";
-import "react-image-lightbox/style.css";
+import { useState, useEffect, SetStateAction } from "react";
+
+import "yet-another-react-lightbox/styles.css";
 import Image from "next/image";
 import "../styles/landingPage.css";
-import "../types/images.ts";
-import { images } from "../types/images";
+import { images } from '../types/images';
+
+import Lightbox from "yet-another-react-lightbox";
 
 export default function LandingPage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,16 +37,8 @@ export default function LandingPage() {
       document.body.style.overflow = "auto";
     };
   }, [isOpen]);
-  const preloadImage = (src: string) => {
-    return new Promise((resolve) => {
-      const img = new window.Image();
-      img.src = src;
-      img.onload = resolve;
-    });
-  };
 
-  const openLightbox = async (index: number) => {
-    await preloadImage(images[index].src);
+  const openLightbox = (index: SetStateAction<number>) => {
     setPhotoIndex(index);
     setIsOpen(true);
     setIsSliderPaused(true);
@@ -129,20 +122,14 @@ export default function LandingPage() {
 
         {isOpen && (
           <Lightbox
-            mainSrc={images[photoIndex].src}
-            nextSrc={images[(photoIndex + 1) % images.length].src}
-            prevSrc={
-              images[(photoIndex + images.length - 1) % images.length].src
-            }
-            onCloseRequest={closeLightbox}
-            onMovePrevRequest={() =>
-              setPhotoIndex((photoIndex + images.length - 1) % images.length)
-            }
-            onMoveNextRequest={() =>
-              setPhotoIndex((photoIndex + 1) % images.length)
-            }
-            imageTitle={images[photoIndex].title}
-            imageCaption={images[photoIndex].description}
+            open={isOpen}
+            close={closeLightbox}
+            slides={images.map((image) => ({
+              src: image.src,
+              title: image.title,
+              description: image.description,
+            }))}
+            index={photoIndex}
           />
         )}
       </div>
