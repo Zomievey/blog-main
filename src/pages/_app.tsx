@@ -16,6 +16,10 @@ function AuthChecker({
   const router = useRouter();
 
   useEffect(() => {
+    console.log("User:", user);
+    console.log("Loading:", loading);
+    console.log("Current Path:", router.pathname);
+    
     if (!loading) {
       if (!user && !publicRoutes.includes(router.pathname)) {
         router.push("/login");
@@ -27,6 +31,7 @@ function AuthChecker({
       }
     }
   }, [user, loading, router]);
+  
 
   return <Component {...pageProps} />;
 }

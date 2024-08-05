@@ -1,57 +1,60 @@
-import { useState, useEffect } from "react";
 import Navbar from "../components/NavBar";
 import Footer from "../components/Footer";
 import Link from "next/link";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { useState, useEffect } from "react";
+import Lightbox from "react-image-lightbox";
+import "react-image-lightbox/style.css";
+import Image from "next/image";
 import "../styles/landingPage.css";
-import axios from "axios";
-import { Suggestion } from "../types";
+import "../types/images.ts";
+import { images } from "../types/images";
 
 export default function LandingPage() {
-  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [displayText, setDisplayText] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [photoIndex, setPhotoIndex] = useState(0);
+  const [isSliderPaused, setIsSliderPaused] = useState(false);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 1200,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: !isSliderPaused,
+  };
 
   useEffect(() => {
-    const fetchSuggestions = async () => {
-      try {
-        const response = await axios.get("/api/suggestions");
-        setSuggestions(response.data);
-      } catch (error) {
-        console.error("Error fetching suggestions:", error);
-      }
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
     };
+  }, [isOpen]);
+  const preloadImage = (src: string) => {
+    return new Promise((resolve) => {
+      const img = new window.Image();
+      img.src = src;
+      img.onload = resolve;
+    });
+  };
 
-    fetchSuggestions();
-  }, []);
+  const openLightbox = async (index: number) => {
+    await preloadImage(images[index].src);
+    setPhotoIndex(index);
+    setIsOpen(true);
+    setIsSliderPaused(true);
+  };
 
-  useEffect(() => {
-    if (suggestions.length > 0) {
-      let currentIndex = 0;
-      const currentText = suggestions[activeIndex]?.topic || "";
-
-      const typeWriterEffect = setInterval(() => {
-        setDisplayText((prev) => prev + currentText[currentIndex]);
-        currentIndex++;
-
-        if (currentIndex === currentText.length) {
-          clearInterval(typeWriterEffect);
-        }
-      }, 100); // Adjust typing speed
-
-      return () => clearInterval(typeWriterEffect);
-    }
-  }, [suggestions, activeIndex]);
-
-  useEffect(() => {
-    if (suggestions.length > 0) {
-      const interval = setInterval(() => {
-        setActiveIndex((prevIndex) => (prevIndex + 1) % suggestions.length);
-        setDisplayText(""); // Clear text for the next suggestion
-      }, 9000); // Adjust for longer visibility and slower transitions
-
-      return () => clearInterval(interval);
-    }
-  }, [suggestions]);
+  const closeLightbox = () => {
+    setIsOpen(false);
+    setIsSliderPaused(false);
+  };
 
   return (
     <div className='flex flex-col min-h-screen'>
@@ -59,73 +62,89 @@ export default function LandingPage() {
       <div className='flex-grow'>
         <div className='hero-section'>
           <div className='hero-content'>
-            <h1 className='hero-title'>Innovative Tech Blog</h1>
+            <h1 className='hero-title'>Feral Art</h1>
             <p className='hero-subtitle'>
-              Discover insights, tutorials, and tips on the latest in
-              technology. Join our community and stay updated.
+              Experience the beauty of oils, watercolors, and murals where
+              innovation meets artistic whimsy.
             </p>
+            <p className='hero-subtitle'>
+              From pet portraits and illustrations to abstract oil paintings,
+              each piece is inspired by nature’s wonders:
+              <br /> clouds, sunsets, flowers, and the wild around us.
+            </p>
+
+            <p className='hero-subtitle'>
+              Commissions are always welcome.
+              <br /> If you have a vision or a question, I’d love to bring it to
+              life.
+              <br /> Simply fill out the form under "Get a Quote" to get
+              started.
+            </p>
+
             <div className='button-container'>
               <Link href='/homepage' legacyBehavior>
-                <a className='btn-custom text-2xl'>Go to Blog</a>
+                <a className='btn-custom text-2xl'>Go to blog</a>
               </Link>
-              <Link href='/suggestions' legacyBehavior>
-                <a className='btn-custom text-2xl'>Leave Feedback</a>
-              </Link>
+              <a
+                href='https://docs.google.com/forms/d/e/1FAIpQLSe3h2RtEGB-TV4GHbG5z70ikIaQdQpwbq_DTfwSSJPMYynszw/viewform?usp=sf_link'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='btn-custom text-2xl'
+              >
+                Get a quote
+              </a>
             </div>
           </div>
         </div>
 
-        <div className='grid-container'>
-          <div className='grid-item large-tile'>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.It has survived not only
-            five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
-          </div>
-          <div className='grid-item small-tile'>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem
-          </div>
-          <div className='grid-item small-tile'>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s,
-          </div>
-          <div className='grid-item medium-tile'>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s
-          </div>
-          <div className='grid-item medium-tile'>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s,
-          </div>
-          <div className='grid-item medium-tile'>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s
-          </div>
+        <div className='slideshow-container'>
+          <Slider {...settings}>
+            {images.map((image, index) => (
+              <div key={index} className='slide'>
+                <div
+                  onClick={() => openLightbox(index)}
+                  className='flex justify-center items-center'
+                  style={{ height: "100%" }}
+                >
+                  <div className='image-border'>
+                    <Image
+                      className='image'
+                      src={image.src}
+                      alt={image.title}
+                      width={image.width}
+                      height={image.height}
+                      layout='responsive'
+                      quality={75}
+                      objectFit='cover'
+                    />
+                  </div>
+                </div>
+                <h1 className='hero-subtitle text-center mt-3'>
+                  {image.title}
+                </h1>
+              </div>
+            ))}
+          </Slider>
         </div>
 
-        <div className='testimonials-section'>
-          <h2 className='text-3xl font-bold mb-4'>Testimonials</h2>
-          <div className='testimonial-container'>
-            <div className='testimonial'>
-            <p>“{displayText}”</p>
-            </div>
-          </div>
-        </div>
+        {isOpen && (
+          <Lightbox
+            mainSrc={images[photoIndex].src}
+            nextSrc={images[(photoIndex + 1) % images.length].src}
+            prevSrc={
+              images[(photoIndex + images.length - 1) % images.length].src
+            }
+            onCloseRequest={closeLightbox}
+            onMovePrevRequest={() =>
+              setPhotoIndex((photoIndex + images.length - 1) % images.length)
+            }
+            onMoveNextRequest={() =>
+              setPhotoIndex((photoIndex + 1) % images.length)
+            }
+            imageTitle={images[photoIndex].title}
+            imageCaption={images[photoIndex].description}
+          />
+        )}
       </div>
       <Footer />
     </div>

@@ -28,6 +28,7 @@
   --nav-link-color: var(--text-color-light);
   --icon-fill: white;
 }
+
 body {
   margin: 0;
   padding: 0;
@@ -59,7 +60,7 @@ body {
 
 .hero-section {
   position: relative;
-  height: 80vh;
+  height: 90vh;
   background-color: var(--secondary-color);
   display: flex;
   align-items: center;
@@ -73,7 +74,6 @@ body {
 .hero-content {
   position: relative;
   z-index: 2;
-  padding: 2rem;
   border-radius: 10px;
 }
 
@@ -127,7 +127,7 @@ body {
 .button-container {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .grid-container {
@@ -178,25 +178,7 @@ body {
   color: var(--text-color-light);
 }
 
-@media (max-width: 768px) {
-  .grid-container {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(6, auto);
-  }
-
-  .grid-item {
-    grid-column: span 1;
-    grid-row: span 1;
-  }
-
-  .medium-tile:last-child {
-    grid-column: span 1;
-    grid-row: span 2;
-  }
-}
-
 /********Testimonials Section Styles */
-
 
 .testimonials-section {
   padding: 2rem;
@@ -279,16 +261,6 @@ body {
   color: var(--text-color-light);
 }
 
-@media (max-width: 768px) {
-  .testimonials-section {
-    padding: 1rem;
-  }
-
-  .testimonial {
-    font-size: 1rem;
-  }
-}
-
 /********************************Button Styles */
 
 .btn-custom,
@@ -333,8 +305,6 @@ body {
   background: transparent;
 }
 
-/***************************************Navbar Styles */
-
 .navbar-container {
   width: 100%;
   margin: 0 auto;
@@ -371,6 +341,7 @@ body {
   align-items: center;
   justify-content: center;
   color: var(--text-color-dark);
+  margin-top: 3em;
 }
 
 .text-balance {
@@ -498,6 +469,7 @@ body {
   visibility: visible;
   opacity: 1;
 }
+
 /*********************** Hide Password Toggle */
 .password-toggle {
   position: absolute;
@@ -518,11 +490,6 @@ body {
 }
 
 /************************************Login and Signup styles */
-/* .flex-grow {
-  display: flex;
-  align-items: center; 
-  justify-content: center; 
-} */
 
 .auth-container {
   margin: 0 auto;
@@ -726,7 +693,71 @@ body {
   background-color: var(--primary-color);
 }
 
+/****************Light Box Styles */
+
+body.lightbox-open {
+  overflow: hidden;
+}
+
+.image-border {
+  border-width: 4px;
+  border-style: solid;
+  cursor: pointer;
+}
+
+[data-theme="dark"] .image-border {
+  border-color: white;
+}
+
+[data-theme="light"] .image-border {
+  border-color: black;
+}
+
+.slideshow-container {
+  margin-top: 8em;
+}
+
+image {
+  width: 100%;
+  height: auto;
+}
+
+/*********************************Media Queries for Mobile Responsiveness */
+
 @media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, auto);
+  }
+
+  .grid-item {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .medium-tile:last-child {
+    grid-column: span 1;
+    grid-row: span 2;
+  }
+
+  .auth-container {
+    padding: 1.5rem;
+    max-width: 90%;
+    width: 100%;
+  }
+
+  .auth-container input {
+    max-width: 300px;
+  }
+
+  .testimonials-section {
+    padding: 1rem;
+  }
+
+  .testimonial {
+    font-size: 1rem;
+  }
+
   .suggestions-container {
     padding: 1rem;
   }
@@ -737,5 +768,34 @@ body {
 
   .suggestions-btn-custom {
     padding: 0.5rem 1rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+    margin-top: 3em;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .navbar-container {
+    flex-direction: column;
+  }
+
+  .button-container {
+    flex-direction: column;
+  }
+
+  .footer {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .slick-next {
+    display: none !important;
   }
 }
