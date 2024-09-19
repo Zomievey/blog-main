@@ -105,8 +105,19 @@ export default function Login() {
               to the signup page.
             </div>
           </div>
+          <div className='mt-4'>
+            <span>
+              Don't want to sign up?
+              <br /> Use our generic login:
+              <br />
+              <strong>Email:</strong> everyone@gmail.com
+              <br />
+              <strong>Password:</strong> password!
+            </span>
+          </div>
         </div>
       </div>
+
       <Footer />
     </div>
   );

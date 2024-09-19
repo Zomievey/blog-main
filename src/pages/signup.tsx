@@ -28,10 +28,15 @@ export default function Signup() {
     try {
       await signup(email, password, username);
       setSignupStatus("success");
-      setTimeout(() => router.push("/"), 2000);
+      setTimeout(() => router.push("/"), 2000); // Redirect after 2 seconds
     } catch (error) {
+      // `any` type used to handle Firebase-specific error properties
       console.error("Signup failed:", error);
-      setSignupStatus("error");
+      if ((error as { code: string }).code === "auth/email-already-in-use") {
+        setSignupStatus("emailInUse");
+      } else {
+        setSignupStatus("error");
+      }
     }
   };
 
@@ -82,22 +87,36 @@ export default function Signup() {
               Signup
             </button>
           </form>
+
+          {/* Success Message */}
           {signupStatus === "success" && (
             <p className='mt-4' style={{ color: "#49a4c4" }}>
               Signup successful! Redirecting...
             </p>
           )}
+
+          {/* Generic Error Message */}
           {signupStatus === "error" && (
             <p className='mt-4' style={{ color: "#ff7474" }}>
               Signup failed. Please try again.
             </p>
           )}
+
+          {/* Email Already in Use Error */}
+          {signupStatus === "emailInUse" && (
+            <p className='mt-4' style={{ color: "#ff7474" }}>
+              This email is already in use. Please use a different email.
+            </p>
+          )}
+
+          {/* Password Error */}
           {signupStatus === "passwordError" && (
             <p className='mt-4' style={{ color: "#ff7474" }}>
               Password must be at least 6 characters long and contain at least
               one special character.
             </p>
           )}
+
           <div className='tooltip-container'>
             <ImInfo className='info-icon' />
             <div className='tooltip'>
