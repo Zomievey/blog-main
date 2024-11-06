@@ -9,7 +9,7 @@ import { useState, useEffect, SetStateAction } from "react";
 import "yet-another-react-lightbox/styles.css";
 import Image from "next/image";
 import "../styles/landingPage.css";
-import { images } from '../types/images';
+import { images } from "../types/images";
 
 import Lightbox from "yet-another-react-lightbox";
 
@@ -68,10 +68,16 @@ export default function LandingPage() {
 
             <p className='hero-subtitle'>
               Commissions are always welcome.
-              <br /> If you have a vision or a question, I’d love to bring it to
-              life.
-              <br /> Simply fill out the form under "Get a Quote" to get
-              started.
+              <br /> If you have a vision, I’d love to bring it to life!<br />
+              <br /> Fill out the form under "Get a Quote", or if you have any questions feel free to <br />send me an email:{" "}
+              <a
+                href='mailto:hayleehunter85@gmail.com'
+                className='forgot-password'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                SEND EMAIL 🤍
+              </a>
             </p>
 
             <div className='button-container'>

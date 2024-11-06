@@ -48,7 +48,7 @@ export default function Signup() {
           <h1>Signup</h1>
           <form onSubmit={handleSignup} className='space-y-4'>
             <div>
-              <label>Username</label>
+              <label htmlFor='username'>Username</label>
               <input
                 title='username'
                 type='text'
@@ -58,7 +58,7 @@ export default function Signup() {
               />
             </div>
             <div>
-              <label>Email</label>
+              <label htmlFor='email'>Email</label>
               <input
                 title='email'
                 type='email'
@@ -68,7 +68,7 @@ export default function Signup() {
               />
             </div>
             <div className='relative'>
-              <label>Password</label>
+              <label htmlFor='password'>Password</label>
               <input
                 title='password'
                 type={showPassword ? "text" : "password"}

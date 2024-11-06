@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext, useContext } from "react";
+import { useState, useEffect, createContext, useContext, useMemo } from "react";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -9,6 +9,7 @@ import {
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { auth, db } from "../utils/firebase";
+import PropTypes from "prop-types";
 /* eslint-disable @next/next/no-img-element */
 
 const AuthContext = createContext();
@@ -96,6 +97,19 @@ export function AuthProvider({ children }) {
     return firebaseSendPasswordResetEmail(auth, email);
   };
 
+  const authContextValue = useMemo(
+    () => ({
+      user,
+      role,
+      signin,
+      signup,
+      signout,
+      getUsername,
+      sendPasswordResetEmail,
+    }),
+    [user, role, signin, signup, signout, getUsername, sendPasswordResetEmail]
+  );
+
   if (loading) {
     return (
       <div>
@@ -113,20 +127,14 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        role,
-        signin,
-        signup,
-        signout,
-        getUsername,
-        sendPasswordResetEmail,
-      }}
-    >
+    <AuthContext.Provider value={authContextValue}>
       {children}
     </AuthContext.Provider>
   );
 }
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export const useAuth = () => useContext(AuthContext);

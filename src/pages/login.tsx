@@ -53,7 +53,7 @@ export default function Login() {
           <h1>Login</h1>
           <form onSubmit={handleLogin} className='space-y-4'>
             <div>
-              <label>Email</label>
+              <label htmlFor='email'>Email</label>
               <input
                 title='email'
                 type='email'
@@ -63,7 +63,7 @@ export default function Login() {
               />
             </div>
             <div className='relative'>
-              <label>Password</label>
+              <label htmlFor='password'>Password</label>
               <input
                 title='password'
                 type={showPassword ? "text" : "password"}
@@ -108,7 +108,7 @@ export default function Login() {
           <div className='mt-4'>
             <span>
               Don't want to sign up?
-              <br /> Use our generic login:
+              <br /> Use the generic login:
               <br />
               <strong>Email:</strong> everyone@gmail.com
               <br />
