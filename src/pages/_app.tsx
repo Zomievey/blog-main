@@ -2,6 +2,8 @@ import { AuthProvider, useAuth } from "../hooks/useAuth";
 import "../app/globals.css";
 import { ComponentType, useEffect } from "react";
 import { useRouter } from "next/router";
+import { Analytics } from '@vercel/analytics/react';
+
 
 const publicRoutes = ["/signup", "/login", "/resetPassword"];
 
@@ -46,6 +48,7 @@ function MyApp({
   return (
     <AuthProvider>
       <AuthChecker Component={Component} pageProps={pageProps} />
+      <Analytics />
     </AuthProvider>
   );
 }
