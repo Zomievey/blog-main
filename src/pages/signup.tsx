@@ -45,7 +45,7 @@ export default function Signup() {
       <Navbar />
       <div className='flex-grow flex items-center justify-left'>
         <div className='auth-container'>
-          <h1>Signup</h1>
+          <h1>Sign Up</h1>
           <form onSubmit={handleSignup} className='space-y-4'>
             <div>
               <label htmlFor='username'>Username</label>

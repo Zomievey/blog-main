@@ -24,7 +24,7 @@ export default function Navbar({ isLandingPage = false }) {
                 <a className='nav-link text-white'>Login</a>
               </Link>
               <Link href='/signup' legacyBehavior>
-                <a className='nav-link text-white'>Signup</a>
+                <a className='nav-link text-white'>Sign Up</a>
               </Link>
             </>
           )}
